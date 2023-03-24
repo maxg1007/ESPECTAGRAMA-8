@@ -33,6 +33,7 @@ export default class Feed extends Component {
 
   componentDidMount() {
     this.fetchUser();
+    this.fetchPosts();
   }
 
   async fetchUser() {
@@ -64,7 +65,9 @@ export default class Feed extends Component {
               });
             });
           }
+          console.log("codigo passou por aqui");
           this.setState({ posts: posts });
+          console.log(this.state.posts);
           // this.props.setUpdateToFalse();
         },
         function (errorObject) {
@@ -100,19 +103,20 @@ export default class Feed extends Component {
             </Text>
           </View>
         </View>
-        <View style={styles.cardContainer}>
-          {this.state.post ? (
-            <View>
-              <Text>nenhum post disponivel</Text>
-            </View>
-          ) : (
+
+        {!this.state.posts[0] ? (
+          <View>
+            <Text>nenhum post disponivel</Text>
+          </View>
+        ) : (
+          <View style={styles.cardContainer}>
             <FlatList
               keyExtractor={this.keyExtractor}
               data={this.state.posts}
               renderItem={this.renderItem}
             />
-          )}
-        </View>
+          </View>
+        )}
       </View>
     );
   }

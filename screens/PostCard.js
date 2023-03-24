@@ -41,6 +41,15 @@ export default class PostCard extends Component {
 
   render() {
     let post = this.state.post_data;
+    let images = {
+      image1: require("../assets/image_1.jpg"),
+      image2: require("../assets/image_2.jpg"),
+      image3: require("../assets/image_3.jpg"),
+      image4: require("../assets/image_4.jpg"),
+      image5: require("../assets/image_5.jpg"),
+      image6: require("../assets/image_6.jpg"),
+      image7: require("../assets/image_7.jpg"),
+    };
     return (
       <TouchableOpacity
         style={styles.container}
@@ -69,10 +78,7 @@ export default class PostCard extends Component {
               <Text style={styles.authorNameText}>{post.author}</Text>
             </View>
           </View>
-          <Image
-            source={require("../assets/post.jpeg")}
-            style={styles.postImage}
-          />
+          <Image source={images[post.preview_image]} style={styles.postImage} />
           <View style={styles.captionContainer}>
             <Text
               style={
@@ -105,12 +111,18 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     borderRadius: RFValue(20),
     padding: RFValue(20),
+    shadowColor: "white",
+    shadowOffset: { width: 5, height: 5 },
+    shadowRadius: 10,
   },
   cardContainerLight: {
     margin: RFValue(13),
     backgroundColor: "white",
     borderRadius: RFValue(20),
     padding: RFValue(20),
+    shadowColor: "black",
+    shadowOffset: { width: 5, height: 5 },
+    shadowRadius: 10,
   },
   authorContainer: {
     flex: 0.1,

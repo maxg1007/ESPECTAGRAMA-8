@@ -48,7 +48,7 @@ export default class LoginScreen extends Component {
       <View style={styles.container}>
         <SafeAreaView style={styles.droidSafeArea} />
 
-        <Text style={styles.appTitleText}>Narração de Histórias</Text>
+        <Text style={styles.appTitleText}>Expectagrama</Text>
         <Image source={appIcon} style={styles.appIcon} />
 
         <TextInput

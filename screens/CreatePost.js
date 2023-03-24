@@ -10,11 +10,11 @@ import {
   Platform,
   StatusBar,
   SafeAreaView,
+  Button,
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { RFValue } from "react-native-responsive-fontsize";
 import firebase from "firebase";
-import { Button } from "react-native";
 
 export default class CreatePost extends Component {
   constructor(props) {
@@ -53,15 +53,20 @@ export default class CreatePost extends Component {
       };
       await firebase
         .database()
-        .ref("/post/" + Math.random().toString(36).slice(2))
+        .ref("/posts/" + Math.random().toString(36).slice(2))
         .set(postData)
-        .then(function (snapshot) {});
+        .then(function (snapshot) {
+          alert("Ok");
+          console.log(postData);
+        })
+        .catch((error) => alert(error.message));
       //this.props.setUpdateToTrue();
+
       this.props.navigation.navigate("Feed");
     } else {
       alert(
         "Error",
-        "Todos os campos são obriatorios",
+        "Todos os campos são obrigatorios",
         [{ text: "ok", onPress: () => console.log("Ok Pressionado") }],
         { cancelable: false }
       );
@@ -120,7 +125,11 @@ export default class CreatePost extends Component {
                   this.setState({ dropDownHeight: 40 });
                 }}
                 placeholder={this.state.previewImage}
-                onSelectItem={(item) => {
+                //obsoleto
+                // onSelectItem={(item) => {
+                //   this.setState({ previewImage: item.value });
+                // }}
+                onChangeItem={(item) => {
                   this.setState({ previewImage: item.value });
                 }}
                 arrowIconStyle={{ color: "white" }}
@@ -146,7 +155,9 @@ export default class CreatePost extends Component {
               placeholderTextColor="white"
             />
 
-            <Button onPress={() => this.addPost()}>Enviar</Button>
+            <View style={{ alignSelf: "center", marginTop: 20 }}>
+              <Button title="Enviar" onPress={() => this.addPost()}></Button>
+            </View>
           </ScrollView>
         </View>
         <View style={{ flex: 0.08 }} />
